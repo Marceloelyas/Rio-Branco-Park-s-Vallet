@@ -1,0 +1,43 @@
+
+
+Rio Branco Park Vallet/
+│
+├── index.html                 # Página principal
+├── login.html                 # Nova página de login
+├── manifest.json              # Para PWA
+├── service-worker.js          # Para PWA e offline
+│
+├── css/
+│   ├── style.css              # Estilos principais
+│   ├── responsive.css         # Estilos responsivos
+│   └── auth.css               # Estilos para autenticação
+│
+├── js/
+│   ├── app.js                # Lógica principal da aplicação
+│   ├── auth.js               # Sistema de autenticação
+│   ├── charts.js             # Gráficos e estatísticas
+│   ├── reports.js            # Relatórios avançados
+│   └── pwa.js                # Configuração PWA
+│
+└── README.md                 # Documentação do projeto
+
+rio-park-vallet/
+├── index.html
+├── login.html
+├── manifest.json
+├── service-worker.js
+├── css/
+│   ├── style.css
+│   ├── auth.css
+│   └── responsive.css
+├── js/
+│   ├── app.js
+│   ├── auth.js
+│   ├── charts.js
+│   ├── pwa.js
+│   ├── reports.js
+│   └── init.js
+├── icons/ (opcional)
+│   ├── icon-192.png
+│   └── icon-512.png
+└── README.md
