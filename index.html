@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rio Branco Park's Vallet - Dashboard</title>
+    
+    <!-- Meta tags para PWA -->
+    <meta name="description" content="Sistema de gerenciamento de estacionamento vallet">
+    <!-- meta name="theme-color" content="#16213e" media="(prefers-color-scheme: light)" -->
+    <!-- meta name="theme-color" content="#1a1a2e" media="(prefers-color-scheme: dark)" -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Rio Park Vallet">
+    
+      <!-- Um único apple-touch-icon que satisfaz o validador -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    
+    <!-- Ícone padrão para outros navegadores -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+   
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Fontes e Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Ícones para PWA -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Ícone padrão -->
+    <link rel="apple-touch-icon" href="icons/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
+    <link rel="icon" href="icons/icon-512.png" type="image/png" sizes="512x512">
+    
+    <!-- Apple Touch Icon - apenas uma linha com tamanhos -->
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+
+    <!-- Para Windows/Edge -->
+    <meta name="msapplication-TileColor" content="#16213e">
+    <meta name="msapplication-TileImage" content="icons/icon-144.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Fontes e Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1><i class="fas fa-car"></i> Rio Branco Park's Vallet</h1>
+                <p class="subtitle">Sistema de Gerenciamento</p>
+            </div>
+            
+            <nav class="menu">
+                <a href="#" class="menu-item active" id="dashboard-link">
+                    <i class="fas fa-tachometer-alt"></i> 
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <a href="#" class="menu-item" id="estacionamento-link">
+                    <i class="fas fa-parking"></i> 
+                    <span class="menu-text">Estacionamento</span>
+                </a>
+                <a href="#" class="menu-item" id="clientes-link">
+                    <i class="fas fa-users"></i> 
+                    <span class="menu-text">Clientes</span>
+                </a>
+                <a href="#" class="menu-item" id="relatorios-link">
+                    <i class="fas fa-chart-bar"></i> 
+                    <span class="menu-text">Relatórios</span>
+                </a>
+                <a href="#" class="menu-item" id="configuracoes-link">
+                    <i class="fas fa-cog"></i> 
+                    <span class="menu-text">Configurações</span>
+                </a>
+            </nav>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="user-name">Administrador</span>
+                        <span class="user-role">Gerente</span>
+                    </div>
+                    <div class="user-actions">
+                    <button class="user-action-btn switch-user-btn" 
+                            aria-label="Trocar de usuário"
+                            title="Trocar para outro usuário">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    <button class="user-action-btn logout-btn" id="logout-btn" 
+                            aria-label="Sair do sistema"
+                            title="Sair completamente do sistema">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h2 id="page-title">Dashboard</h2>
+                    <p id="page-subtitle">Visão geral do sistema</p>
+                </div>
+                <div class="header-right">
+                    <div class="date-time">
+                        <span id="current-date">Carregando...</span>
+                        <span id="current-time">00:00:00</span>
+                    </div>
+                    <button class="notification-btn" id="notification-btn" 
+                            aria-label="Notificações"
+                            title="Ver notificações">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                        <span class="sr-only">Notificações</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area" id="content-area">
+                <!-- Dashboard Content -->
+                <div class="page-content" id="dashboard-content">
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Vagas Ocupadas</h3>
+                                <p class="stat-number" id="occupied-spots">0</p>
+                                <p class="stat-change" id="occupied-by-sector"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-parking"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Vagas Disponíveis</h3>
+                                <p class="stat-number" id="available-spots">200</p>
+                                <p class="stat-change" id="available-by-sector"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Distribuição</h3>
+                                <p class="stat-number">A:30 B:30</p>
+                                <p class="stat-change">C:70 D:70</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-wheelchair"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Vagas PCD</h3>
+                                <p class="stat-number" id="pcd-spots-count">16</p>
+                                <p class="stat-change">8% do total</p> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="charts-grid">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3>Ocupação por Horário</h3>
+                                <div class="chart-controls">
+                                    <button class="chart-btn" id="toggle-occupation-view" title="Alternar visualização">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="occupation-chart" aria-label="Gráfico de ocupação por horário"></canvas>
+                            </div>
+                            <div class="chart-footer">
+                                <span>Últimas 24 horas</span>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3>Faturamento por Dia</h3>
+                                <div class="chart-controls">
+                                    <select id="revenue-period" title="Selecionar período">
+                                        <option value="7d">Últimos 7 dias</option>
+                                        <option value="15d">Últimos 15 dias</option>
+                                        <option value="30d">Últimos 30 dias</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="revenue-chart" aria-label="Gráfico de faturamento por dia"></canvas>
+                            </div>
+                            <div class="chart-footer">
+                                <span id="revenue-period-text">Últimos 7 dias</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activities -->
+                    <div class="activities-card">
+                        <h3>Atividades Recentes</h3>
+                        <div class="activities-list" id="activities-list">
+                            <!-- Atividades serão carregadas via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estacionamento Content -->
+                <div class="page-content hidden" id="estacionamento-content">
+                    <div class="page-header">
+                        <h3>Gerenciamento de Estacionamento</h3>
+                        <button class="btn-primary" id="add-vehicle-btn" 
+                                aria-label="Adicionar novo veículo"
+                                title="Clique para registrar um novo veículo">
+                            <i class="fas fa-plus"></i> Novo Veículo
+                        </button>
+                    </div>
+                    
+                    <div class="parking-grid" id="parking-grid">
+                        <!-- Vagas serão geradas via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Clientes Content -->
+                <div class="page-content hidden" id="clientes-content">
+                    <div class="page-header">
+                        <h3>Gerenciamento de Clientes</h3>
+                        <button class="btn-primary" id="add-client-btn" 
+                                aria-label="Adicionar novo cliente"
+                                title="Clique para cadastrar um novo cliente">
+                            <i class="fas fa-user-plus"></i> Novo Cliente
+                        </button>
+                    </div>
+                    
+                    <div class="clients-table-container">
+                        <table class="clients-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Placa do Veículo</th>
+                                    <th>Modelo</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clients-table-body">
+                                <!-- Clientes serão carregados via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Relatórios Content -->
+                <div class="page-content hidden" id="relatorios-content">
+                    <div class="page-header">
+                        <h3>Relatórios</h3>
+                        <div class="report-controls">
+                            <select id="report-type" 
+                                    aria-label="Selecione o tipo de relatório"
+                                    title="Escolha o tipo de relatório">
+                                <option value="daily">Relatório Diário</option>
+                                <option value="weekly">Relatório Semanal</option>
+                                <option value="monthly">Relatório Mensal</option>
+                            </select>
+                            <input type="date" id="report-date" 
+                                   aria-label="Selecione a data do relatório"
+                                   title="Escolha a data do relatório">
+                            <button class="btn-primary" id="generate-report-btn" 
+                                    aria-label="Gerar relatório"
+                                    title="Clique para gerar o relatório">
+                                <i class="fas fa-download"></i> Gerar Relatório
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="report-content" id="report-content">
+                        <!-- Conteúdo do relatório será carregado aqui -->
+                    </div>
+                </div>
+
+                <!-- Configurações Content -->
+                <div class="page-content hidden" id="configuracoes-content">
+                    <div class="page-header">
+                        <h3>Configurações do Sistema</h3>
+                    </div>
+                    
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h4><i class="fas fa-money-bill"></i> Preços</h4>
+                            <div class="form-group">
+                                <label for="first-hour-price">Primeira hora</label>
+                                <input type="number" id="first-hour-price" value="15.00" step="0.01"
+                                       title="Digite o preço da primeira hora de estacionamento"
+                                       placeholder="Ex: 15.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="additional-hour-price">Horas adicionais</label>
+                                <input type="number" id="additional-hour-price" value="10.00" step="0.01"
+                                       title="Digite o preço de cada hora adicional após a primeira"
+                                       placeholder="Ex: 10.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="daily-price">Diária</label>
+                                <input type="number" id="daily-price" value="80.00" step="0.01"
+                                       title="Digite o preço da diária completa (24 horas)"
+                                       placeholder="Ex: 80.00">
+                            </div>
+                            <button class="btn-primary" id="save-prices-btn"
+                                    aria-label="Salvar configurações de preços"
+                                    title="Clique para salvar os preços">
+                                Salvar Preços
+                            </button>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h4><i class="fas fa-parking"></i> Vagas</h4>
+                            <div class="form-group">
+                                <label for="total-spots">Total de Vagas</label>
+                                <input type="number" id="total-spots" value="40" min="1"
+                                       title="Digite o número total de vagas do estacionamento"
+                                       placeholder="Ex: 40">
+                            </div>
+                            <div class="form-group">
+                                <label for="pcd-spots">Vagas para PCD</label>
+                                <input type="number" id="pcd-spots" value="4" min="0"
+                                       title="Digite o número de vagas reservadas para PCD"
+                                       placeholder="Ex: 4">
+                            </div>
+                            <button class="btn-primary" id="save-spots-btn"
+                                    aria-label="Salvar configurações de vagas"
+                                    title="Clique para salvar as configurações de vagas">
+                                Salvar Vagas
+                            </button>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h4><i class="fas fa-user-shield"></i> Usuários</h4>
+                            <div class="users-list" id="users-list">
+                                <!-- Usuários serão carregados via JavaScript -->
+                            </div>
+                            <button class="btn-secondary" id="add-user-btn"
+                                    aria-label="Adicionar novo usuário"
+                                    title="Clique para adicionar um novo usuário">
+                                <i class="fas fa-user-plus"></i> Adicionar Usuário
+                            </button>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h4><i class="fas fa-database"></i> Sistema</h4>
+                            <button class="btn-secondary" id="backup-btn"
+                                    aria-label="Fazer backup dos dados"
+                                    title="Clique para fazer backup de todos os dados">
+                                <i class="fas fa-save"></i> Fazer Backup
+                            </button>
+                            <button class="btn-secondary" id="restore-btn"
+                                    aria-label="Restaurar backup"
+                                    title="Clique para restaurar dados de um backup">
+                                <i class="fas fa-undo"></i> Restaurar Backup
+                            </button>
+                            <button class="btn-danger" id="clear-data-btn"
+                                    aria-label="Limpar todos os dados"
+                                    title="ATENÇÃO: Clique para apagar todos os dados do sistema">
+                                <i class="fas fa-trash"></i> Limpar Dados
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para Novo Veículo -->
+            <div class="modal hidden" id="vehicle-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Registrar Novo Veículo</h3>
+                        <button class="close-modal" id="close-vehicle-modal" 
+                                aria-label="Fechar modal"
+                                title="Clique para fechar este formulário">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="vehicle-form">
+                            <div class="form-group">
+                                <label for="vehicle-plate">Placa do Veículo</label>
+                                <input type="text" id="vehicle-plate" required 
+                                       placeholder="ABC1-A23" 
+                                       title="Digite a placa do veículo">
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicle-model">Modelo</label>
+                                <input type="text" id="vehicle-model" required 
+                                       placeholder="Ex: Honda Civic" 
+                                       title="Digite o modelo do veículo">
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicle-color">Cor</label>
+                                <input type="text" id="vehicle-color" required 
+                                       placeholder="Ex: Prata" 
+                                       title="Digite a cor do veículo">
+                            </div>
+                            <div class="form-group">
+                                <label for="client-name">Nome do Cliente</label>
+                                <input type="text" id="client-name" required
+                                       placeholder="Digite o nome completo"
+                                       title="Digite o nome completo do cliente">
+                            </div>
+                            <div class="form-group">
+                                <label for="client-phone">Telefone</label>
+                                <input type="tel" id="client-phone" required 
+                                       placeholder="(00) 99999-9999" 
+                                       title="Digite o telefone do cliente com DDD">
+                            </div>
+                            <div class="form-group">
+                                <label for="spot-sector">Setor</label>
+                                <div class="sector-filter" id="sector-filter">
+                                    <button type="button" class="sector-filter-btn active" data-sector="all">Todos</button>
+                                    <button type="button" class="sector-filter-btn" data-sector="A">Setor A</button>
+                                    <button type="button" class="sector-filter-btn" data-sector="B">Setor B</button>
+                                    <button type="button" class="sector-filter-btn" data-sector="C">Setor C</button>
+                                    <button type="button" class="sector-filter-btn" data-sector="D">Setor D</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="spot-number">Vaga</label>
+                                <select id="spot-number" required 
+                                        title="Selecione a vaga para o veículo"
+                                        aria-label="Selecione uma vaga disponível">
+                                    <!-- Vagas disponíveis serão carregadas via JS -->
+                                </select>
+                            </div>
+                            <div class="form-buttons">
+                                <button type="button" class="btn-secondary" id="cancel-vehicle-btn"
+                                        aria-label="Cancelar operação"
+                                        title="Clique para cancelar o registro">
+                                    Cancelar
+                                </button>
+                                <button type="submit" class="btn-primary"
+                                        aria-label="Registrar entrada do veículo"
+                                        title="Clique para registrar a entrada do veículo">
+                                    Registrar Entrada
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Modal para Trocar Usuário -->
+    <div class="modal hidden" id="switch-user-modal">
+        <div class="modal-content switch-user-modal">
+            <div class="modal-header">
+                <h3>Trocar de Usuário</h3>
+                <button class="close-modal" id="close-switch-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="user-list" id="user-list">
+                    <!-- Usuários serão carregados via JavaScript -->
+                </div>
+                
+                <div class="quick-login-form">
+                    <h4>Acesso Rápido</h4>
+                    <input type="text" id="quick-username" 
+                        class="quick-login-input" 
+                        placeholder="Usuário"
+                        title="Digite o nome de usuário">
+                    <input type="password" id="quick-password" 
+                        class="quick-login-input" 
+                        placeholder="Senha"
+                        title="Digite a senha">
+                    <button class="quick-login-btn" id="quick-login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="button" class="btn-secondary" id="cancel-switch-btn">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html>
