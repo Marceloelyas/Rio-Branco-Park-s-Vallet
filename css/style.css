@@ -214,6 +214,211 @@ body {
 }
 
 /* ============================================
+   CAMPO DE PESQUISA DE VEÍCULOS
+   ============================================ */
+
+/* Container da busca */
+.search-container {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 5px 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    border-color: #667eea;
+    box-shadow: 0 2px 15px rgba(102, 126, 234, 0.2);
+}
+
+.search-box i:first-child {
+    color: #999;
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+#search-vehicle {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: #333;
+    background: transparent;
+}
+
+#search-vehicle::placeholder {
+    color: #999;
+}
+
+.search-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+
+.search-btn:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+}
+
+/* Resultados da pesquisa */
+.search-results {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+}
+
+.search-results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.search-results-header h4 {
+    color: #1a1a2e;
+    font-size: 1.2rem;
+}
+
+#results-count {
+    color: #667eea;
+    font-weight: 700;
+}
+
+.search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.search-result-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    border-left: 4px solid #667eea;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.result-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+}
+
+.result-info h5 {
+    color: #1a1a2e;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.result-info p {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 2px 0;
+}
+
+.result-actions {
+    margin-left: auto;
+}
+
+.result-actions .btn-secondary {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+/* Estado vazio da pesquisa */
+.search-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.search-empty-state i {
+    font-size: 3rem;
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+.search-empty-state h4 {
+    color: #999;
+    margin-bottom: 10px;
+}
+
+/* Responsividade da pesquisa */
+@media (max-width: 768px) {
+    .search-container {
+        max-width: 100%;
+    }
+    
+    .search-box {
+        padding: 5px 10px;
+    }
+    
+    #search-vehicle {
+        padding: 10px 0;
+        font-size: 0.9rem;
+    }
+    
+    .search-results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-result-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .result-actions {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+    
+    .result-actions .btn-secondary {
+        width: 100%;
+    }
+}
+
+/* ============================================
    RESPONSIVIDADE CORRIGIDA - IMAGENS
    ============================================ */
 
