@@ -464,12 +464,12 @@ class ParkingSystem {
         parkingGrid.innerHTML = '';
         
         // Cabeçalhos dos setores
-        const sectors = ['A', 'B', 'C', 'D'];
+        const sectors = ['FRENTE', 'EDU', 'BAIXO', 'AUTO'];
         const sectorTitles = {
-            'A': 'Setor A (Vagas 1-30)',
-            'B': 'Setor B (Vagas 31-60)',
-            'C': 'Setor C (Vagas 61-130)',
-            'D': 'Setor D (Vagas 131-200)'
+            'FRENTE': 'Setor FRENTE (Vagas 1-30)',
+            'EDU': 'Setor EDU (Vagas 31-60)',
+            'BAIXO': 'Setor BAIXO (Vagas 61-130)',
+            'AUTO': 'Setor AUTO (Vagas 131-200)'
         };
         
         // Renderiza cada setor separadamente
@@ -982,7 +982,167 @@ class ParkingSystem {
             }, 2000);
         }
     }
+// Função para buscar veículos
+function searchVehicles(searchTerm) {
+    const searchTermLower = searchTerm.toLowerCase().trim();
+    const parkingSpots = document.querySelectorAll('.parking-spot');
+    const resultsContainer = document.getElementById('search-results-grid');
+    const resultsCount = document.getElementById('results-count');
+    const searchResults = document.getElementById('search-results');
+    const parkingGrid = document.getElementById('parking-grid');
+    
+    let foundResults = [];
+    
+    // Limpar resultados anteriores
+    resultsContainer.innerHTML = '';
+    
+    if (!searchTerm) {
+        searchResults.classList.add('hidden');
+        parkingGrid.classList.remove('hidden');
+        return;
+    }
+    
+    // Procurar em cada vaga
+    parkingSpots.forEach(spot => {
+        const spotNumber = spot.querySelector('.spot-number')?.textContent || '';
+        const spotSector = spot.querySelector('.spot-sector')?.textContent || '';
+        const vehicleInfo = spot.querySelector('.vehicle-info')?.textContent || '';
+        
+        const searchableText = `${spotNumber} ${spotSector} ${vehicleInfo}`.toLowerCase();
+        
+        if (searchableText.includes(searchTermLower)) {
+            foundResults.push({
+                element: spot,
+                number: spotNumber,
+                sector: spotSector,
+                info: vehicleInfo
+            });
+        }
+    });
+    
+    // Exibir resultados
+    if (foundResults.length > 0) {
+        resultsCount.textContent = foundResults.length;
+        
+        foundResults.forEach(result => {
+            const resultCard = document.createElement('div');
+            resultCard.className = 'search-result-card';
+            
+            resultCard.innerHTML = `
+                <div class="result-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="result-info">
+                    <h5>Vaga ${result.number}</h5>
+                    <p><strong>Setor:</strong> ${result.sector}</p>
+                    <p>${result.info}</p>
+                </div>
+                <div class="result-actions">
+                    <button class="btn-secondary" onclick="highlightSpot('${result.number}')">
+                        <i class="fas fa-map-marker-alt"></i> Localizar
+                    </button>
+                </div>
+            `;
+            
+            resultsContainer.appendChild(resultCard);
+        });
+        
+        searchResults.classList.remove('hidden');
+        parkingGrid.classList.add('hidden');
+    } else {
+        // Nenhum resultado encontrado
+        resultsContainer.innerHTML = `
+            <div class="search-empty-state">
+                <i class="fas fa-search"></i>
+                <h4>Nenhum veículo encontrado</h4>
+                <p>Não encontramos veículos com o termo "${searchTerm}"</p>
+                <button class="btn-secondary" id="show-all-spots">
+                    <i class="fas fa-eye"></i> Ver todas as vagas
+                </button>
+            </div>
+        `;
+        
+        document.getElementById('show-all-spots')?.addEventListener('click', () => {
+            document.getElementById('search-vehicle').value = '';
+            searchResults.classList.add('hidden');
+            parkingGrid.classList.remove('hidden');
+        });
+        
+        resultsCount.textContent = '0';
+        searchResults.classList.remove('hidden');
+        parkingGrid.classList.add('hidden');
+    }
+}
 
+// Função para destacar uma vaga específica
+function highlightSpot(spotNumber) {
+    // Voltar para a visualização normal
+    document.getElementById('search-results').classList.add('hidden');
+    document.getElementById('parking-grid').classList.remove('hidden');
+    
+    // Limpar pesquisa
+    document.getElementById('search-vehicle').value = '';
+    
+    // Encontrar e destacar a vaga
+    const spotElement = document.querySelector(`.spot-number:contains("${spotNumber}")`)?.closest('.parking-spot');
+    if (spotElement) {
+        // Rolar até a vaga
+        spotElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Adicionar classe de destaque
+        spotElement.classList.add('highlight');
+        
+        // Remover destaque após 3 segundos
+        setTimeout(() => {
+            spotElement.classList.remove('highlight');
+        }, 3000);
+    }
+}
+
+// Adicione este evento no seu código de inicialização
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-vehicle');
+    const searchBtn = document.getElementById('search-btn');
+    const clearSearchBtn = document.getElementById('clear-search');
+    
+    // Buscar ao digitar (com debounce para performance)
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            searchVehicles(this.value);
+        }, 300); // Aguarda 300ms após a última digitação
+    });
+    
+    // Buscar ao clicar no botão
+    searchBtn.addEventListener('click', function() {
+        searchVehicles(searchInput.value);
+    });
+    
+    // Buscar ao pressionar Enter
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchVehicles(this.value);
+        }
+    });
+    
+    // Limpar pesquisa
+    clearSearchBtn?.addEventListener('click', function() {
+        searchInput.value = '';
+        searchVehicles('');
+    });
+});
+
+// Adicione esta função de utilidade se não existir
+if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.msMatchesSelector || 
+                                Element.prototype.webkitMatchesSelector;
+}
+
+// Polyfill para :contains (se necessário)
+if (!document.querySelectorAll(':contains')) {
+    // Adicionar suporte básico se necessário
+}
     // ============================================
     // MÉTODOS PARA TROCA DE USUÁRIO
     // ============================================
