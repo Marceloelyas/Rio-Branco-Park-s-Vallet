@@ -234,6 +234,53 @@
                 </div>
 
                 <!-- Estacionamento Content -->
+                <!-- Estacionamento Content -->
+<div class="page-content hidden" id="estacionamento-content">
+    <div class="page-header">
+        <div class="header-left">
+            <h3>Gerenciamento de Estacionamento</h3>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" 
+                           id="search-vehicle" 
+                           placeholder="Pesquisar veículo por placa, modelo ou vaga..."
+                           aria-label="Campo de pesquisa para localizar veículos">
+                    <button class="search-btn" id="search-btn" 
+                            aria-label="Buscar veículo"
+                            title="Clique para buscar veículo">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-primary" id="add-vehicle-btn" 
+                    aria-label="Adicionar novo veículo"
+                    title="Clique para registrar um novo veículo">
+                <i class="fas fa-plus"></i> Novo Veículo
+            </button>
+        </div>
+    </div>
+    
+    <!-- Resultados da pesquisa -->
+    <div class="search-results hidden" id="search-results">
+        <div class="search-results-header">
+            <h4>Resultados da Pesquisa (<span id="results-count">0</span>)</h4>
+            <button class="btn-secondary" id="clear-search">
+                <i class="fas fa-times"></i> Limpar
+            </button>
+        </div>
+        <div class="search-results-grid" id="search-results-grid">
+            <!-- Resultados serão inseridos aqui via JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Área normal das vagas (será ocultada durante a pesquisa) -->
+    <div class="parking-grid" id="parking-grid">
+        <!-- Vagas serão geradas via JavaScript -->
+    </div>
+</div>
                 <div class="page-content hidden" id="estacionamento-content">
                     <div class="page-header">
                         <h3>Gerenciamento de Estacionamento</h3>
