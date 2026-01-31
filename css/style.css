@@ -25,6 +25,30 @@ body {
     overflow: hidden;
 }
 
+/* ============================================
+   MENU DA SIDEBAR - COR BRANCA
+   ============================================ */
+
+.menu-item {
+    color: white !important;
+}
+
+.menu-item span {
+    color: white !important;
+}
+
+.menu-item i {
+    color: white !important;
+}
+
+/* Garantir que o texto do menu fique branco em todos os estados */
+.sidebar a,
+.sidebar a:visited,
+.sidebar a:hover,
+.sidebar a:active {
+    color: white !important;
+}
+
 /* Sidebar */
 /* ============================================
    MENU DA SIDEBAR - COR BRANCA
