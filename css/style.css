@@ -699,3 +699,164 @@ body {
 .parking-spot.sector-d::after {
     background: #9b59b6;
 }
+
+/* ESTILOS PARA OS NOVOS SETORES */
+.sector-frente {
+    border-left: 4px solid #3b82f6 !important;
+    background: linear-gradient(135deg, #dbeafe, #93c5fd) !important;
+}
+
+.sector-edu {
+    border-left: 4px solid #10b981 !important;
+    background: linear-gradient(135deg, #d1fae5, #6ee7b7) !important;
+}
+
+.sector-baixo {
+    border-left: 4px solid #f59e0b !important;
+    background: linear-gradient(135deg, #fef3c7, #fcd34d) !important;
+}
+
+.sector-auto {
+    border-left: 4px solid #8b5cf6 !important;
+    background: linear-gradient(135deg, #ede9fe, #c4b5fd) !important;
+}
+
+/* BADGES DOS SETORES */
+.badge-sector-frente {
+    background-color: #3b82f6;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-sector-edu {
+    background-color: #10b981;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-sector-baixo {
+    background-color: #f59e0b;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-sector-auto {
+    background-color: #8b5cf6;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* CABEÇALHOS DOS SETORES */
+.sector-header h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #1f2937;
+    border-bottom: 2px solid;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.sector-header[data-sector="FRENTE"] h3 {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.sector-header[data-sector="EDU"] h3 {
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.sector-header[data-sector="BAIXO"] h3 {
+    border-color: #f59e0b;
+    color: #f59e0b;
+}
+
+.sector-header[data-sector="AUTO"] h3 {
+    border-color: #8b5cf6;
+    color: #8b5cf6;
+}
+
+/* TEXTO EM MAIÚSCULO */
+.spot-sector,
+.spot-status,
+.spot-type-badge,
+.status-text,
+.vehicle-plate,
+.entry-time,
+.sector-stats span {
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* NOTIFICAÇÕES EM MAIÚSCULO */
+.notification-content span {
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* BOTÕES EM MAIÚSCULO */
+.btn-occupy,
+.btn-release,
+.btn-sm,
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info {
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* TÍTULOS EM MAIÚSCULO */
+h1, h2, h3, h4, h5, h6,
+.page-title,
+.card-header h3,
+.modal-header h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* STATUS EM MAIÚSCULO */
+.status-text {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.status-text.disponível {
+    color: #10b981;
+}
+
+.status-text.ocupada {
+    color: #ef4444;
+}
+
+/* TIPOS DE VAGA EM MAIÚSCULO */
+.spot-type-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.spot-type-badge.pcd {
+    background-color: #8b5cf6;
+    color: white;
+}
+
+.spot-type-badge.vip {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.spot-type-badge.regular {
+    background-color: #6b7280;
+    color: white;
+}
