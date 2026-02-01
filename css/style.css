@@ -700,7 +700,8 @@ body {
     background: #9b59b6;
 }
 
-/* ESTILOS PARA OS NOVOS SETORES */
+/* ***************************************************ESTILOS PARA OS NOVOS SETORES 
+********†*****************************************/
 .sector-frente {
     border-left: 4px solid #3b82f6 !important;
     background: linear-gradient(135deg, #dbeafe, #93c5fd) !important;
@@ -798,7 +799,8 @@ body {
     font-weight: 600;
 }
 
-/* BOTÕES EM MAIÚSCULO */
+/* ===≠======≠=================================≠≠=====BOTÕES EM MAIÚSCULO 
+==≠=======≠=======≠==============================*/
 .btn-occupy,
 .btn-release,
 .btn-sm,
