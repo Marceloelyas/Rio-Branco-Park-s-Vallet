@@ -115,6 +115,22 @@
         <main class="main-content">
             <!-- Header -->
             <header class="header">
+                <div class="search-container" id="vehicle-search-container">
+                    <div class="search-input-group">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" 
+                                id="vehicle-search" 
+                                class="search-input" 
+                                placeholder="BUSCAR VEÍCULO (PLACA OU MODELO)..."
+                                title="Digite placa, modelo ou nome do cliente">
+                        <button id="clear-search" class="clear-search-btn" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <!-- <button id="search-btn" class="btn-search">
+                        <i class="fas fa-search"></i>
+                    </button> -->
+                </div>
                 <div class="header-left">
                     <h2 id="page-title">Dashboard</h2>
                     <p id="page-subtitle">Visão geral do sistema</p>
@@ -234,52 +250,6 @@
                 </div>
 
                 <!-- Estacionamento Content -->
-<div class="page-content hidden" id="estacionamento-content">
-    <div class="page-header">
-        <div class="header-left">
-            <h3>Gerenciamento de Estacionamento</h3>
-            <div class="search-container">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" 
-                           id="search-vehicle" 
-                           placeholder="Pesquisar veículo por placa, modelo ou vaga..."
-                           aria-label="Campo de pesquisa para localizar veículos">
-                    <button class="search-btn" id="search-btn" 
-                            aria-label="Buscar veículo"
-                            title="Clique para buscar veículo">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="header-right">
-            <button class="btn-primary" id="add-vehicle-btn" 
-                    aria-label="Adicionar novo veículo"
-                    title="Clique para registrar um novo veículo">
-                <i class="fas fa-plus"></i> Novo Veículo
-            </button>
-        </div>
-    </div>
-    
-    <!-- Resultados da pesquisa -->
-    <div class="search-results hidden" id="search-results">
-        <div class="search-results-header">
-            <h4>Resultados da Pesquisa (<span id="results-count">0</span>)</h4>
-            <button class="btn-secondary" id="clear-search">
-                <i class="fas fa-times"></i> Limpar
-            </button>
-        </div>
-        <div class="search-results-grid" id="search-results-grid">
-            <!-- Resultados serão inseridos aqui via JavaScript -->
-        </div>
-    </div>
-    
-    <!-- Área normal das vagas (será ocultada durante a pesquisa) -->
-    <div class="parking-grid" id="parking-grid">
-        <!-- Vagas serão geradas via JavaScript -->
-    </div>
-</div>
                 <div class="page-content hidden" id="estacionamento-content">
                     <div class="page-header">
                         <h3>Gerenciamento de Estacionamento</h3>
@@ -487,10 +457,10 @@
                                 <label for="spot-sector">Setor</label>
                                 <div class="sector-filter" id="sector-filter">
                                     <button type="button" class="sector-filter-btn active" data-sector="all">Todos</button>
-                                    <button type="button" class="sector-filter-btn" data-sector="A">Setor A</button>
-                                    <button type="button" class="sector-filter-btn" data-sector="B">Setor B</button>
-                                    <button type="button" class="sector-filter-btn" data-sector="C">Setor C</button>
-                                    <button type="button" class="sector-filter-btn" data-sector="D">Setor D</button>
+                                    <button type="button" class="sector-filter-btn" data-sector="A">FRENTE</button>
+                                    <button type="button" class="sector-filter-btn" data-sector="B">EDU</button>
+                                    <button type="button" class="sector-filter-btn" data-sector="C">BAIXO</button>
+                                    <button type="button" class="sector-filter-btn" data-sector="D">ALTO</button>
                                 </div>
                             </div>
                             <div class="form-group">
