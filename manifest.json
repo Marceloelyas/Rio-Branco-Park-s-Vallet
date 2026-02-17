@@ -2,7 +2,7 @@
   "name": "Rio Branco Park Vallet",
   "short_name": "RBPV",
   "description": "Sistema de gerenciamento de estacionamento vallet",
-  "start_url": "./index.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#1a1a2e",
   "theme_color": "#16213e",
