@@ -17,6 +17,6 @@
     <!-- Texto RPV -->
     <text x="50" y="90" text-anchor="middle" fill="#ffffff" 
           font-family="Arial, sans-serif" font-size="16" font-weight="bold">
-        RPV
+        RBPark 
     </text>
 </svg>
