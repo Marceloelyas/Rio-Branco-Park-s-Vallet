@@ -1,6 +1,6 @@
 {
   "name": "Rio Branco Park Vallet",
-  "short_name": "RBPV",
+  "short_name": "RBVP",
   "description": "Sistema de gerenciamento de estacionamento vallet",
   "start_url":"https://marceloelyas.github.io/Rio-Branco-Park-s-Vallet",
   "display": "standalone",
